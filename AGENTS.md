@@ -12,4 +12,6 @@ This repository is public. Everything committed here, including history, reaches
 - Version every plugin change: when a skill changes, raise its `metadata.version` in `SKILL.md` and the plugin version in `plugin.json` and its mirrors, and add a `## [x.y.z] - YYYY-MM-DD` changelog section naming each changed skill as `` `name` x.y.z``. Verify with `python3 ../dotidot-ci-tools/scripts/package.py --check --against origin/main`, after `git worktree add ../dotidot-ci-tools ci-tools` once; the packaging script lives on the `ci-tools` branch, never in the plugin. Merging a new plugin version into `main` publishes its tag and GitHub release.
 - Run `claude plugin validate .` when Claude Code is available, and the smoke scenarios in `docs/testing.md` after changing skill behavior.
 - In installation instructions, keep the verification status truthful and distinguish connecting the MCP server from installing the skills.
-- Use feature branches. Do not commit, push, publish, or choose a license unless requested.
+- When someone asks for a new skill for Dotidot customers or a change to one, follow `docs/contributing-skills.md`. That request covers creating a branch, committing, pushing, and opening a pull request; never merge it.
+- Use feature branches. Otherwise, do not commit, push, publish, or choose a license unless requested.
+- Every change reaches `main` only through a pull request approved by a code owner (`.github/CODEOWNERS`).

@@ -64,7 +64,7 @@ The plugin contains no credentials and stores no data. Requests go from your AI 
 
 | Path | Purpose |
 | --- | --- |
-| `skills/` | Skills shared by all clients. Rules: [skill guidelines](docs/skill-guidelines.md). |
+| `skills/` | Skills shared by all clients. Rules: [skill guidelines](docs/skill-guidelines.md); adding one with Claude Code: [contributing a skill](docs/contributing-skills.md). |
 | `.claude-plugin/` | Claude plugin manifest, marketplace, and the directory icon, which the directory finds here by its standard name. |
 | `.mcp.json` | Claude MCP connection. |
 | `plugin.json`, `mcp.json` | Portable Agent Plugins manifests for OpenAI-compatible clients. |
@@ -74,6 +74,8 @@ The plugin contains no credentials and stores no data. Requests go from your AI 
 | `.github/workflows/package.yml` | Checks pull requests, builds packages, and publishes a release for each new version. |
 | `docs/testing.md` | Static checks and smoke scenarios. |
 | `CHANGELOG.md` | Releases and the skill versions they contain. |
+| `AGENTS.md`, `CLAUDE.md` | Instructions for AI agents working in this repository. |
+| `.github/CODEOWNERS`, `.github/pull_request_template.md` | The code owner who approves every change, and the pull request template. |
 | `LICENSE` | MIT license. |
 
 ### Versions and releases
