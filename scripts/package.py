@@ -12,7 +12,7 @@ from zipfile import ZIP_DEFLATED, ZipFile, ZipInfo
 
 ROOT = Path(__file__).resolve().parents[1]
 TARGETS = {
-    "claude": [".claude-plugin/plugin.json", ".claude-plugin/icon.png", ".mcp.json"],
+    "claude": [".claude-plugin/plugin.json", ".mcp.json"],
     "openai": ["plugin.json", "mcp.json"],
 }
 # Changing any of these changes what users install, so it needs a new plugin version.
@@ -180,9 +180,13 @@ def package_files(root):
             continue
         if path.is_file() and path.suffix != ".pyc":
             shared.append(relative)
+    # The icon path comes from the manifest so that no script names the image file itself:
+    # the directory holds plugins whose code refers to bundled images.
+    icon = read_json(root, ".claude-plugin/plugin.json").get("icon")
+    extra = {"claude": [icon] if icon else []}
     packages = {}
     for target, manifests in TARGETS.items():
-        paths = sorted(set(shared + [Path(path) for path in manifests]))
+        paths = sorted(set(shared + [Path(path) for path in manifests + extra.get(target, [])]))
         for path in paths:
             absolute = root / path
             require(absolute.is_file() and not absolute.is_symlink(), f"Missing or linked file: {path}")

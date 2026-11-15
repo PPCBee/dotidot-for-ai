@@ -65,7 +65,7 @@ The plugin contains no credentials and stores no data. Requests go from your AI 
 | Path | Purpose |
 | --- | --- |
 | `skills/` | Skills shared by all clients. Rules: [skill guidelines](docs/skill-guidelines.md). |
-| `.claude-plugin/` | Claude plugin manifest, marketplace, and directory icon (`icon.png`). |
+| `.claude-plugin/` | Claude plugin manifest, marketplace, and the directory icon that the manifest names. |
 | `.mcp.json` | Claude MCP connection. |
 | `plugin.json`, `mcp.json` | Portable Agent Plugins manifests for OpenAI-compatible clients. |
 | `.agents/plugins/marketplace.json` | Codex marketplace. |
