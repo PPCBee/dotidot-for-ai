@@ -1,6 +1,6 @@
 {
   "name": "dotidot",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Work with your Dotidot account from your AI assistant: a live connection to your data plus Dotidot skills.",
   "author": {
     "name": "Dotidot",
@@ -14,5 +14,6 @@
     "product-feeds",
     "mcp"
   ],
+  "icon": ".claude-plugin/icon.png",
   "privacyPolicyUrl": "https://www.dotidot.io/privacy-policy"
 }

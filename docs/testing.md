@@ -2,12 +2,12 @@
 
 ## Static checks
 
-From the repository root:
+From the repository root, with the `ci-tools` branch checked out next to it (`git worktree add ../dotidot-ci-tools ci-tools`):
 
 ```sh
-python3 scripts/package.py --check --against origin/main
+python3 ../dotidot-ci-tools/scripts/package.py --check --against origin/main
 claude plugin validate .
-python3 scripts/package.py
+python3 ../dotidot-ci-tools/scripts/package.py
 ```
 
 The first command checks that all manifests share the name, version, description, and MCP endpoint, that every skill has a `metadata.version`, and that changed skills and manifests come with raised versions and a changelog section. The last command builds the archives in `dist/`; check that they contain only the manifests, `README.md`, `docs/testing.md`, and `skills/`.

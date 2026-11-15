@@ -10,11 +10,10 @@ Each skill is a self-contained folder whose name matches the skill's `name`:
 skills/<name>/
 ├── SKILL.md          # loaded in full whenever the skill triggers: keep it short
 ├── references/       # detail the skill reads only when needed, e.g. report templates
-├── scripts/          # optional executable helpers
 └── examples/         # optional sample data
 ```
 
-Keep `SKILL.md` to the workflow and its rules, and move long material such as templates, catalogs of checks, or known limitations into `references/`. Refer to those files by their relative path, for example `references/report-template.md`; `scripts/package.py` fails when a referenced file is missing. A skill cannot read files outside its own folder in every client, so do not link to shared files elsewhere in the repository.
+Do not add scripts or other executable files: the Claude directory accepts them in a plugin only from verified organizations, which Dotidot's is not yet. Keep `SKILL.md` to the workflow and its rules, and move long material such as templates, catalogs of checks, or known limitations into `references/`. Refer to those files by their relative path, for example `references/report-template.md`; the packaging check fails when a referenced file is missing. A skill cannot read files outside its own folder in every client, so do not link to shared files elsewhere in the repository.
 
 ## Frontmatter
 
@@ -87,5 +86,5 @@ The plugin's directory listing declares that skills send data only to the declar
 ## Before opening a PR
 
 - Raise the skill and plugin versions and add the changelog section; see "Versions and releases" in the README.
-- Run `python3 scripts/package.py --check --against origin/main` and `claude plugin validate .`.
+- Run `python3 ../dotidot-ci-tools/scripts/package.py --check --against origin/main` and `claude plugin validate .`; see "Versions and releases" in the README for the `ci-tools` setup.
 - Add or update the smoke scenarios in `docs/testing.md` for changed behavior.
