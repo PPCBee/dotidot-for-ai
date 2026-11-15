@@ -1,0 +1,16 @@
+{
+  "name": "dotidot",
+  "owner": {
+    "name": "Dotidot"
+  },
+  "metadata": {
+    "description": "The Dotidot plugin: a live connection to your Dotidot account plus Dotidot skills."
+  },
+  "plugins": [
+    {
+      "name": "dotidot",
+      "source": "./",
+      "description": "Work with your Dotidot account from your AI assistant: a live connection to your data plus Dotidot skills."
+    }
+  ]
+}

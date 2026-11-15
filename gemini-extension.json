@@ -1,0 +1,10 @@
+{
+  "name": "dotidot",
+  "version": "0.1.0",
+  "description": "Work with your Dotidot account from your AI assistant: a live connection to your data plus Dotidot skills.",
+  "mcpServers": {
+    "dotidot": {
+      "httpUrl": "https://mcp.dotidot.io/mcp"
+    }
+  }
+}

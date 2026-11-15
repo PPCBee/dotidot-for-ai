@@ -1,0 +1,67 @@
+name: Package plugins
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+          # The version check compares the PR with its base branch.
+          fetch-depth: 0
+      - name: Require raised versions for changed skills and plugin files
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_REF: ${{ github.base_ref }}
+        run: python3 scripts/package.py --check --against "origin/$BASE_REF"
+      - name: Build plugin archives
+        run: python3 scripts/package.py
+      - name: Upload packages for review
+        uses: actions/upload-artifact@v7
+        with:
+          name: dotidot-plugins-${{ github.sha }}
+          path: |
+            dist/dotidot-*.zip
+            dist/SHA256SUMS
+          if-no-files-found: error
+
+  release:
+    name: Publish a new plugin version
+    needs: package
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    concurrency:
+      group: plugin-release
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+      - uses: actions/download-artifact@v7
+        with:
+          name: dotidot-plugins-${{ github.sha }}
+          path: dist/
+      - name: Create the tag and GitHub release unless this version exists
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          version=$(python3 -c 'import json; print(json.load(open("plugin.json"))["version"])')
+          if gh release view "v$version" >/dev/null 2>&1; then
+            echo "Release v$version already exists; nothing to publish."
+            exit 0
+          fi
+          python3 scripts/package.py --notes > release-notes.md
+          gh release create "v$version" dist/dotidot-*.zip dist/SHA256SUMS \
+            --target "$GITHUB_SHA" --title "Dotidot plugin $version" --notes-file release-notes.md

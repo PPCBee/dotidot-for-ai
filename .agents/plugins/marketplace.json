@@ -1,0 +1,20 @@
+{
+  "name": "dotidot",
+  "interface": {
+    "displayName": "Dotidot"
+  },
+  "plugins": [
+    {
+      "name": "dotidot",
+      "source": {
+        "source": "local",
+        "path": "./"
+      },
+      "policy": {
+        "installation": "AVAILABLE",
+        "authentication": "ON_INSTALL"
+      },
+      "category": "Productivity"
+    }
+  ]
+}
