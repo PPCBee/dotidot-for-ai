@@ -2,6 +2,12 @@
 
 Notable changes to the Dotidot plugin, newest first. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each release is headed by the plugin version and date, such as `## [0.1.0] - 2026-11-14`, and names each skill whose version changed, such as `check-permissions` 0.1.0.
 
+## [0.1.1] - 2026-11-15
+
+### Changed
+
+- Re-encoded the directory icon without changing how it looks, so the directory's file checks no longer flag it.
+
 ## [0.1.0] - 2026-11-14
 
 ### Added
