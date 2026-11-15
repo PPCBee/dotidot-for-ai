@@ -70,7 +70,7 @@ The plugin contains no credentials and stores no data. Requests go from your AI 
 | `plugin.json`, `mcp.json` | Portable Agent Plugins manifests for OpenAI-compatible clients. |
 | `.agents/plugins/marketplace.json` | Codex marketplace. |
 | `gemini-extension.json` | Gemini CLI extension. |
-| `scripts/package.py` | Metadata and version checks, and reproducible ZIP builds. |
+| `ci-tools` branch | `scripts/package.py`: metadata and version checks, and reproducible ZIP builds. It lives outside the plugin because the Claude directory accepts scripts in a plugin only from verified organizations. |
 | `.github/workflows/package.yml` | Checks pull requests, builds packages, and publishes a release for each new version. |
 | `docs/testing.md` | Static checks and smoke scenarios. |
 | `CHANGELOG.md` | Releases and the skill versions they contain. |
@@ -84,11 +84,12 @@ The plugin and each skill have their own [semantic version](https://semver.org):
 - **Skill:** `metadata.version` in the skill's `SKILL.md` frontmatter, as a quoted string. Raise the major version for changed behavior or a new account write, the minor version for a new scenario, and the patch version for a wording fix. While the major version is 0, raise the minor version for changed behavior.
 - **Changelog:** a `## [x.y.z] - YYYY-MM-DD` section for each plugin version that names every changed skill with its new version.
 
-Before opening a pull request:
+Before opening a pull request, check out the `ci-tools` branch next to the repository once, then run the checks from the repository root:
 
 ```sh
-python3 scripts/package.py --check --against origin/main
+git worktree add ../dotidot-ci-tools ci-tools   # once
+python3 ../dotidot-ci-tools/scripts/package.py --check --against origin/main
 claude plugin validate .
 ```
 
-Pull requests run the same version check. After a merge to `main` with a new plugin version, the workflow creates the `v<version>` tag and a GitHub release with `dotidot-claude-<version>.zip`, `dotidot-openai-<version>.zip`, and `SHA256SUMS`. `python3 scripts/package.py` builds the same archives locally in `dist/`.
+Pull requests run the same version check. After a merge to `main` with a new plugin version, the workflow creates the `v<version>` tag and a GitHub release with `dotidot-claude-<version>.zip`, `dotidot-openai-<version>.zip`, and `SHA256SUMS`. `python3 ../dotidot-ci-tools/scripts/package.py` builds the same archives locally in `dist/`. The workflow runs the `ci-tools` branch at the tag pinned in `CI_TOOLS_REF`; see the README on that branch for changing the tooling.

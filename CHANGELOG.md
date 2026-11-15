@@ -2,6 +2,13 @@
 
 Notable changes to the Dotidot plugin, newest first. The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/). Each release is headed by the plugin version and date, such as `## [0.1.0] - 2026-11-14`, and names each skill whose version changed, such as `check-permissions` 0.1.0.
 
+## [0.1.4] - 2026-11-15
+
+### Changed
+
+- The Claude manifest names the icon again, so the directory shows it.
+- The packaging and version checks moved out of the plugin to the `ci-tools` branch; installs no longer include them.
+
 ## [0.1.3] - 2026-11-15
 
 ### Changed
