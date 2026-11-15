@@ -180,10 +180,12 @@ def package_files(root):
             continue
         if path.is_file() and path.suffix != ".pyc":
             shared.append(relative)
-    # The icon path comes from the manifest so that no script names the image file itself:
-    # the directory holds plugins whose code refers to bundled images.
-    icon = read_json(root, ".claude-plugin/plugin.json").get("icon")
-    extra = {"claude": [icon] if icon else []}
+    # Ship every file in .claude-plugin/ except the marketplace, so the archive carries the
+    # directory icon without any script or manifest naming the image: the directory holds
+    # plugins whose code can reach a bundled image.
+    claude_dir = [path.relative_to(root).as_posix() for path in sorted((root / ".claude-plugin").iterdir())
+                  if path.is_file() and path.name not in {"marketplace.json", ".DS_Store"}]
+    extra = {"claude": claude_dir}
     packages = {}
     for target, manifests in TARGETS.items():
         paths = sorted(set(shared + [Path(path) for path in manifests + extra.get(target, [])]))
