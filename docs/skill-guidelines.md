@@ -80,6 +80,10 @@ Facts about the Dotidot API, such as known limitations, the right order of calls
 
 A skill that needs anything beyond the Dotidot MCP connection, such as a local command, a language runtime, or another MCP server, adds a row to "Requirements" in the README and still works, with reduced results, when that requirement is missing.
 
+## Data destinations
+
+The plugin's directory listing declares that skills send data only to the declared connector, the Dotidot MCP server. A skill that sends data anywhere else, such as another API, a webhook, or another MCP server, names that service in the README, and the maintainer updates the plugin's data handling answer in the developer portal before the release. Otherwise the directory's security scan refuses the version as sending data to an undisclosed destination.
+
 ## Before opening a PR
 
 - Raise the skill and plugin versions and add the changelog section; see "Versions and releases" in the README.
