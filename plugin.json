@@ -1,0 +1,18 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "dotidot",
+  "version": "0.1.0",
+  "description": "Work with your Dotidot account from your AI assistant: a live connection to your data plus Dotidot skills.",
+  "author": {
+    "name": "Dotidot",
+    "url": "https://www.dotidot.io"
+  },
+  "license": "MIT",
+  "homepage": "https://www.dotidot.io/product/mcp",
+  "repository": "https://github.com/PPCBee/dotidot-for-ai",
+  "keywords": [
+    "dotidot",
+    "product-feeds",
+    "mcp"
+  ]
+}

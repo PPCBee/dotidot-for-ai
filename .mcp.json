@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "dotidot": {
+      "type": "http",
+      "url": "https://mcp.dotidot.io/mcp"
+    }
+  }
+}
